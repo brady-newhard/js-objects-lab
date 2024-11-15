@@ -1,31 +1,31 @@
 const pokemon = require("./data.js")
 
 const game = {
-    party: [],
-    gyms: [
-      { location: "Pewter City", completed: false, difficulty: 1 },
-      { location: "Cerulean City", completed: false, difficulty: 2 },
-      { location: "Vermilion City", completed: false, difficulty: 3 },
-      { location: "Celadon City", completed: false, difficulty: 4 },
-      { location: "Fuchsia City", completed: false, difficulty: 5 },
-      { location: "Saffron City", completed: false, difficulty: 6 },
-      { location: "Cinnabar Island", completed: false, difficulty: 7 },
-      { location: "Viridian City", completed: false, difficulty: 8 },
-    ],
-    items: [
-      { name: "potion", quantity: 4 },
-      { name: "pokeball", quantity: 8 },
-      { name: "rare candy", quantity: 99 },
-    ],
-  }
-  //console.dir(pokemon, { maxArrayLength: null })
+  party: [],
+  gyms: [
+    { location: "Pewter City", completed: false, difficulty: 1 },
+    { location: "Cerulean City", completed: false, difficulty: 2 },
+    { location: "Vermilion City", completed: false, difficulty: 3 },
+    { location: "Celadon City", completed: false, difficulty: 4 },
+    { location: "Fuchsia City", completed: false, difficulty: 5 },
+    { location: "Saffron City", completed: false, difficulty: 6 },
+    { location: "Cinnabar Island", completed: false, difficulty: 7 },
+    { location: "Viridian City", completed: false, difficulty: 8 },
+  ],
+  items: [
+    { name: "potion", quantity: 4 },
+    { name: "pokeball", quantity: 8 },
+    { name: "rare candy", quantity: 99 },
+  ],
+}
+//console.dir(pokemon, { maxArrayLength: null })
 
-  //Exercise 1
+//Exercise 1
 
- const pokemonFiftyNine = pokemon[58]
+const pokemonFiftyNine = pokemon[58]
 
-  console.log("Exercise 1: ", pokemonFiftyNine.name)
-  
+console.log("Exercise 1: ", pokemonFiftyNine.name)
+
 /*
 Exercise 2
 */
@@ -41,8 +41,8 @@ console.log("Exercise 2:  Commented out")
 */
 
 game.difficulty = "Hard"
-  
-  console.log("Exercise 3: ",game.difficulty)
+
+console.log("Exercise 3: ", game.difficulty)
 
 /*
 Exercise 4
@@ -56,13 +56,13 @@ pokemon.forEach(element => {
   if (element.starter === true) {
     // console.log("Exercise 4: ", element.name)
     starterPokemon.push(element)
-}
+  }
 });
 const firstPokemon = starterPokemon[0];
-  
-game.party.push(firstPokemon)
 
-  console.log("Exercise 4: ", firstPokemon.name)
+game.party.push(firstPokemon.name)
+
+console.log("Exercise 4: ", firstPokemon.name)
 
 /*
 Exercise 5
@@ -70,14 +70,14 @@ Exercise 5
 2. Consider different attributes like 'type' or 'HP' for your selection. Which array method will you use to add them?
 */
 
-const pokemonHP = [          
-          pokemon[10],
-          pokemon[20],
-          pokemon[30]
+const pokemonHP = [
+  pokemon[10],
+  pokemon[20],
+  pokemon[30]
 ]
 
 for (let i = 0; i < pokemonHP.length; i++) {
-  game.party.push(pokemonHP[i].name)
+  game.party.push(pokemonHP[i])
 }
 console.log("Exercise 5: ", game.party)
 
@@ -90,9 +90,9 @@ Exercise 6
 game.gyms.forEach(gym => {
   if (gym.difficulty < 3) {
     gym.completed = true;
-    }
+  }
 });
-    console.log("Exercise 6: ", game.gyms);
+console.log("Exercise 6: ", game.gyms);
 
 /*
 Exercise 7
@@ -108,18 +108,19 @@ Hint:
 More Hints: The existing starter Pokemon will be *replaced* in your party with the Pokemon it evolved into. When working with an array of objects, the splice() array method is ideal for replacing one element with another. 
 */
 
-game.party.splice(0, 1, "Ivysaur",);
-    
-  console.log("Exercise 7: ", game.party);
+game.party.splice(0, 1, pokemon[1].name);
+
+console.log("Exercise 7: ", game.party[0]);
 
 // Exercise 8
 // 1. Print the name of each Pokémon in your party.
 // 2. Consider using a loop or an array method to access each Pokémon's name.
 
 console.log("Exercise 8: ")
-for (let i = 0; i < game.party.length; i++){
-  
-    console.log(game.party[i]);
+
+for (let i = 0; i < game.party.length; i++) {
+
+  console.log(game.party[i]);
 }
 
 /*
@@ -130,12 +131,14 @@ Exercise 9
 
 console.log("Exercise 9: ");
 
+starterPokemon.splice(0, 1, pokemon[1]);
+
 const pokemonStarters = [];
 
 starterPokemon.forEach(element => {
-    pokemonStarters.push(element.name)
-  })
-    console.log(pokemonStarters);
+  pokemonStarters.push(element.name)
+})
+console.log(pokemonStarters);
 
 /*
 Exercise 10
@@ -149,9 +152,9 @@ After writing this method, call it and pass in a Pokemon object of your choice f
 
 const pokemonObj = []
 
-game.catchPokemon = function(pokemonObj) {
-    game.party.push(pokemonObj)
-    console.log("Exercide 10: ", pokemonObj)
+game.catchPokemon = function (pokemonObj) {
+  game.party.push(pokemonObj)
+  console.log("Exercide 10: ", pokemonObj)
 };
 
 game.catchPokemon(pokemon[34].name)
@@ -168,15 +171,18 @@ Also, log the `game.items` array to confirm that the pokeball quantity is being 
 */
 
 let pokeballQuantity = game.items[1].quantity;
-game.catchPokemon = function(pokemonObj) {
- game.party.push(pokemonObj)
-  for (let i =5; i< game.items.length; i++) {
-    if (game.items[i].name === "pokeball") {
+game.catchPokemon = function (pokemonObj) {
+  game.party.push(pokemonObj)
+  const pokeball = game.items.find(item => item.name === "pokeball");
+  if (pokeball) pokeball.quantity--;
+ };
+  // for (let i = 5; i < game.items.length; i++) {
+  //   if (game.items[i].name === "pokeball") {
 
-      game.items[i].quantity--;
-    }
-  }
-}
+  //     game.items[i].quantity--;
+  //   }
+  // }
+// }
 game.catchPokemon(pokemon[75].name, pokeballQuantity);
 
 console.log("Exercise 11: ", game.party, pokeballQuantity);
@@ -189,9 +195,9 @@ Exercise 12
 game.gyms.forEach(gym => {
   if (gym.difficulty < 6) {
     gym.completed = true;
-    }
+  }
 });
-    console.log("Exercise 12: ", game.gyms);
+console.log("Exercise 12: ", game.gyms);
 
 /*
 Exercise 13
@@ -214,23 +220,24 @@ This method should:
 For example, if five gym objects have a value of `true` on their `completed` property and three gym objects have a value of `false` on their `completed` property, the logged value would be: `{ completed: 5, incomplete: 3 }`.
 */
 
-const gymTally = {
-  completed: 0,
-  incomplete: 0
-}
+
 game.gymStatus = function () {
-  game.gyms.forEach(element => {
-    if (element.completed === true) {
-      gymTally.completed ++;
+  const gymTally = {
+    completed: 0,
+    incomplete: 0
+  }
+  game.gyms.forEach(gym => {
+    if (gym.completed) {
+      gymTally.completed++;
+    } else {
+      gymTally.incomplete++;
     }
-    if (element.completed === false) {
-      gymTally.incomplete ++;
-    } 
   })
+ console.log("Exercise 13: ", gymTally)
 }
 game.gymStatus()
 
-console.log("Exercise 13: ", gymTally)
+
 
 /*
 Exercise 14
@@ -244,10 +251,10 @@ This method should:
 
 game.partyCount = function () {
   const partyNumber = game.party.length
-  
-  console.log("Exercise 14: ", partyNumber)   
-}
-game.partyCount()
+
+  return game.party.length;
+};
+console.log("Exercise 14: ", game.partyCount())
 
 /*
 Exercise 15
@@ -258,9 +265,9 @@ Exercise 15
 game.gyms.forEach(gym => {
   if (gym.difficulty < 8) {
     gym.completed = true;
-    }
+  }
 });
-    console.log("Exercise 15: ", game.gyms);
+console.log("Exercise 15: ", game.gyms);
 
 /*
 Exercise 16
